@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一个css盒子模型</title>
+
+    <style>
+        .h1{
+            background-color: darkblue;
+            font-size: 30px 黑体;
+            color: red;
+           
+
+
+        }
+        .box1{
+            background-color: blueviolet;
+            width:400px;
+            height:400px;
+            padding:30px 20px 40px 20px;
+            border:2px solid red;
+            margin: 50px;
+
+        }
+        .box2{
+            background-color: lime;
+            /*inherit为继承的意思，继承父盒子的数值，也可以自己编写.*/
+            width:inherit ;
+            height: inherit;
+            /*padding:20px 30px;子盒子设置的padding和margin是相对于父盒子的*/
+            /*padding:20px 30px;*/
+            /*padding,margin:简写方向为 上右下左(顺时针方向)。只有两个数字为上下和左右。*/
+            border: 2px dotted red;
+            /*margin: 5px;*/
+            /*注: padding,margin 只允许设置宽度, 不允许设置样式与颜色*/
+        }
+    </style>
+
+</head>
+<body>
+
+<h1 class="h1">下边是两个嵌套的盒子</h1>
+        <div class="box1">
+            <div class="box2"><p color="blue">这里是盒子2继承盒子1的高度和宽度，未设置子盒子外边距和内边距</p>
+            <p>/*注: padding,margin 只允许设置宽度, 不允许设置样式与颜色*/</p>
+            <p>/*padding,margin:简写方向为 上右下左(顺时针方向)。只有两个数字为上下和左右。*/</p></div>
+
+            </div>
+</body>
+</html>
