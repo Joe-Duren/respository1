@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mousewheel</title>
+    <style type="text/css">
+        body{
+            height: 3000px;
+        }
+        #box1 {
+            width: 200px;
+            height: 200px;
+            background-color: #bbbbbb;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            let box1 = document.getElementById("box1");
+        /*
+        *使box的长度随着鼠标滚轮的滚动而变化
+        * 在火狐中，不认onmousewheel,而要用addEventListener绑定DOMMouseScroll
+        * */
+            function bind(obj,eventStr,callback){
+                if(obj.addEventListener){
+                    obj.addEventListener(eventStr,callback,false);
+                }else{
+                    obj.attachEvent("on"+eventStr,function(){
+                        callback.call(obj);
+                    });
+                }
+            }
+            box1.onmousewheel =function (event) {
+            /*
+            *event.wheelDelta判断滚轮滚动，返回一个值，向上120，向下-120
+            *
+            * 在火狐中，event.detail返回一个值，向上-3，向下3
+            * */
+            if (event.wheelDelta > 0 || event.detail < 0){
+                box1.style.height = box1.clientHeight -10 + "px";
+            }else{
+                box1.style.height = box1.clientHeight +10 + "px";
+            }
+
+                /*
+                *当浏览器有滚动条时，滚动也会滚动页面，return false;
+                * */
+                /*
+                                *由于火狐使用addEventListener,取消默认事件需要用event.preventDefault
+                                * */
+                event.preventDefault && event.preventDefault(); //需要写在return false前
+                return false;
+
+            };
+            //为火狐绑定滚轮事件
+            bind(box1,"DOMMouseScroll",box1.onmousewheel);
+
+        }
+    </script>
+</head>
+<body>
+<div id="box1"></div>
+</body>
+</html>
